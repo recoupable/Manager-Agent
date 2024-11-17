@@ -1,0 +1,29 @@
+{
+  "name": "recoup-agent",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun index.ts",
+    "dev": "bun --watch index.ts",
+    "generate-signer": "bun helpers/generateSigner.ts",
+    "test-signer": "bun helpers/testSigner.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@slack/web-api": "^7.7.0",
+    "@stackso/js-core": "^0.5.2",
+    "@supabase/supabase-js": "^2.45.4",
+    "@types/node-cron": "^3.0.11",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "node-cron": "^3.0.3",
+    "openai": "^4.70.2",
+    "resend": "^4.0.1-alpha.0",
+    "viem": "^2.21.18"
+  }
+}
