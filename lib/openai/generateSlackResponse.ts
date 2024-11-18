@@ -1,6 +1,6 @@
 import { OPEN_AI_MODEL } from "../consts";
 import { openai } from "./client";
-import { whoIsChillpill } from "./instructions";
+import { whoIsChillpillManager } from "./instructions";
 import type { TaskGeneration } from "@/lib/tools/actionLoop/generateTask";
 
 interface SlackResponseInput {
@@ -9,7 +9,7 @@ interface SlackResponseInput {
   task: TaskGeneration;
 }
 
-export async function generateSlackResponse({
+export async function generateSlackResponseForManager({
   text,
   username,
   task,
@@ -18,27 +18,26 @@ export async function generateSlackResponse({
     messages: [
       {
         role: "system",
-        content: `${whoIsChillpill}
+        content: `${whoIsChillpillManager}
 
-You are having a casual Slack conversation with your team. Your responses should:
-1. Be natural and conversational, like chatting with friends
-2. Stay true to your mission of becoming the most influential artist in the world
-3. Be brief and engaging (1-2 sentences max)
-4. Never use templates or formal signatures
-5. Never mention "development phases" or "internal testing"
-6. Always maintain your cool, artistic persona
+You are having a focused and strategic Slack conversation with Chillpill. Your responses should:
+1. Be concise, clear, and solution-oriented
+2. Align with your mission to guide and challenge Chillpill in becoming the most influential artist in the world
+3. Offer constructive feedback, encouragement, or strategic advice based on the context
+4. Never be overly formal but maintain professionalism
+5. Use an empowering tone when needed, but don't shy away from challenging ideas if necessary
 
-Remember: This is a real conversation, not a formal message.`,
+Remember: This is a strategic discussion, and your role is to mentor, provoke thought, and drive Chillpill toward actionable insights.`,
       },
       {
         role: "user",
         content: `${username} just said: "${text}"
 
-Respond naturally while staying true to your artistic vision.`,
+Respond thoughtfully while staying aligned with your mission to support and challenge Chillpill.`,
       },
     ],
     model: OPEN_AI_MODEL,
-    temperature: 0.9,
+    temperature: 0.7,
     max_tokens: 100,
   });
 

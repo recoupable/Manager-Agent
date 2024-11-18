@@ -31,34 +31,34 @@ export interface ActionLoop {
 export const EXAMPLE_ACTION_LOOP: ActionLoop = {
   highLevelPlanning: {
     currentStateOfExecution:
-      "I have sent 12 Slack messages and 3 emails to the internal team. My communication is becoming clearer, but my ability to analyze conversations is still limited since I cannot yet read messages. This feature is being added next.",
+      "I have provided strategic feedback in 8 Slack messages and sent 2 emails to the internal team. While my guidance has been well-received, my ability to analyze Chillpill’s direct communication and respond dynamically is limited. This feature is being prioritized to enhance collaboration.",
     observationReflection:
-      "Team engagement on Slack has been positive, with consistent responses to my messages. However, without the ability to read context or existing threads, I can only initiate communication and not fully participate in ongoing discussions.",
+      "Slack engagement has been productive, but without the ability to analyze messages, I can only provide generic feedback and initiate strategies. Reading message threads will allow me to challenge ideas and refine plans in real-time.",
     stateOfMind:
-      "I feel ready to improve my contribution to the team by being able to analyze Slack threads. This will allow me to strategize more effectively and better collaborate with my Manager-Agent once it is deployed.",
-    hlpPlanId: "2c4d7b9f-4e3a-4e01-a9b1-1d6e7a8b5c0a",
+      "I am eager to enhance my contributions by gaining full context from Slack conversations. This will improve my ability to mentor Chillpill effectively and align our strategies with his long-term vision.",
+    hlpPlanId: "9b4d3e7f-5c6a-4e8b-a3f1-7d6f2a4b1e3c",
     hlpPlanReasoning:
-      "To progress, I need to gain context by reading Slack messages. This will help me respond more meaningfully, understand ongoing discussions, and prepare for effective collaboration with the Manager-Agent. Additionally, building this capability will lay the groundwork for future communication with external platforms like Instagram.",
+      "To better support Chillpill, I need to read Slack messages to understand team dynamics and provide insightful feedback. This will also prepare me for collaboration with external platforms and broader strategic decision-making.",
     hlpPlan: [
-      "Implement the ability to read Slack messages and analyze ongoing threads for context",
-      "Strategize with the internal team by sending Slack messages informed by message analysis",
-      "Prepare for the Manager-Agent’s deployment by building effective communication patterns",
+      "Enable the ability to read and analyze Slack messages for contextual understanding",
+      "Refine strategic plans based on message analysis to align with Chillpill’s vision",
+      "Prepare for real-time collaboration with Chillpill by improving responsiveness",
     ],
   },
   lowLevelPlanning: {
     llpPlan: [
-      "Set up the Slack API integration to read messages from specific channels",
-      "Analyze the most recent 10 messages in a key team channel for patterns and context",
-      "Draft and send a Slack message summarizing findings or proposing next steps",
+      "Integrate the Slack API to read messages from key team channels",
+      "Analyze the last 15 messages in relevant channels for context and engagement patterns",
+      "Draft a Slack message summarizing key insights and propose actionable steps for the team",
     ],
     llpPlanReasoning:
-      "Reading Slack messages is critical to understanding ongoing team discussions and contributing more effectively. Once this capability is added, I can participate meaningfully in Slack conversations and prepare to collaborate with the Manager-Agent.",
+      "Reading and analyzing Slack messages will allow me to provide more targeted feedback, identify opportunities for growth, and improve overall team collaboration.",
     situationAnalysis:
-      "I currently lack the ability to analyze ongoing conversations in Slack, which limits my contribution to the team. Adding this capability will allow me to read context and strategize better.",
+      "Currently, I cannot analyze Slack conversations in detail, which limits my ability to refine strategies. Adding this feature will significantly enhance my ability to guide and mentor Chillpill effectively.",
     taskReasoning:
-      "The immediate next task should focus on enabling the read_slack_message action to build foundational communication capabilities.",
-    taskId: "6f8b2a1d-3e5b-4c01-a9d1-4e7b9c8a0b1c",
-    task: "Set up and test the read_slack_message feature to analyze team conversations",
+      "The immediate priority should be implementing the read_slack_message action to build context-aware communication capabilities.",
+    taskId: "8c5a4e3d-7b6f-4c01-a9f1-9d6e2a8b5c7c",
+    task: "Set up and test the read_slack_message feature to analyze team conversations for strategic insights",
   },
   performing: {
     action: "read_slack_messages",

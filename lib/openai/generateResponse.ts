@@ -1,4 +1,4 @@
-import { defaultSystemPrompt, getDefaultUserPrompt } from "./instructions";
+import { defaultSystemPromptManager, getDefaultUserPromptManager } from "./instructions";
 import { openai } from "./client";
 import { OPEN_AI_MODEL } from "../consts";
 
@@ -13,7 +13,7 @@ interface GenerateResponseProps {
   };
 }
 
-export async function generateResponse({
+export async function generateResponseForManager({
   systemPrompt,
   text,
   username,
@@ -22,20 +22,20 @@ export async function generateResponse({
 }: GenerateResponseProps): Promise<string> {
   try {
     const messages = [
-      { role: "system", content: systemPrompt || defaultSystemPrompt },
+      { role: "system", content: systemPrompt || defaultSystemPromptManager },
     ] as any[];
 
     // Add sleep context if available
     if (sleepContext) {
       messages.push({
         role: "system",
-        content: `Recent thoughts: ${sleepContext.finalThoughts}\nCurrent plans: ${sleepContext.highLevelPlans}`,
+        content: `Recent reflections: ${sleepContext.finalThoughts}\nCurrent strategic plans: ${sleepContext.highLevelPlans}`,
       });
     }
 
     messages.push({
       role: "user",
-      content: userPrompt || getDefaultUserPrompt(username, text),
+      content: userPrompt || getDefaultUserPromptManager(username, text),
     });
 
     const response = await openai.chat.completions.create({
@@ -47,7 +47,7 @@ export async function generateResponse({
 
     return response.choices[0].message.content || "🤐";
   } catch (error) {
-    console.error("Error generating AI response:", error);
-    return "Vibes off. Try again.";
+    console.error("Error generating Manager AI response:", error);
+    return "Strategy unclear. Let’s try again.";
   }
 }

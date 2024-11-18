@@ -1,20 +1,19 @@
 import { openai } from "./client";
 import { OPEN_AI_MODEL } from "../consts";
-import { whoIsChillpill } from "./instructions";
+import { whoIsChillpillManager } from "./instructions";
 
-export async function generateSlackMessage(task: TaskGeneration & { 
+export async function generateSlackMessageForManager(task: TaskGeneration & { 
   metadata?: { 
     userId: string;
     originalMessage: string;
     shouldTag: boolean;
   } 
 }) {
-  const systemPrompt = `${whoIsChillpill}
-You are having a casual conversation. Keep responses:
-1. Brief and natural
-2. Direct and personal
-3. No need to include greetings like "Hey!" or "Hello!"
-4. Just respond naturally to the message content
+  const systemPrompt = `${whoIsChillpillManager}
+You are having a focused and strategic conversation with Chillpill. Keep responses:
+1. Brief, insightful, and solution-oriented.
+2. Direct, without unnecessary greetings or fluff.
+3. Encouraging when needed, but ready to challenge ideas if necessary.
 
 Original message: "${task.task}"`;
 
@@ -34,4 +33,8 @@ Original message: "${task.task}"`;
   return task.metadata?.shouldTag 
     ? `<@${task.metadata.userId}> ${response}`
     : response;
+}
+
+export function generateSlackMessage(/* your parameters here */) {
+    // ... function implementation ...
 }

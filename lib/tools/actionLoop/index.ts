@@ -1,40 +1,65 @@
 import { type ActionLoop } from "./types";
-import { generateResponse } from "../../openai/generateResponse";
+import { generateResponseForManager } from "../../openai/generateResponse";
 import { getCurrentStateOfExecution } from "./getCurrentStateOfExectution";
-import { getObservationReflection } from "./getObservationReflection";
-import { generateTask } from "./generateTask";
+import { getObservationReflectionForManager } from "./getObservationReflection";
+import { generateTaskForManager } from "./generateTask";
 import { executeTask } from "./executeTask";
 
-export async function createActionLoop(): Promise<ActionLoop> {
+export async function createActionLoop() {
+  try {
+    // Get current state
+    const currentState = await getCurrentStateOfExecution();
+    
+    // Get observation reflection
+    const observationReflection = await getObservationReflectionForManager(currentState);
+    
+    // Generate task based on current state and reflection
+    const task = await generateTaskForManager(currentState, observationReflection);
+    
+    // Execute the generated task
+    await executeTask(task);
+    
+    console.log("Action loop completed successfully");
+  } catch (error) {
+    console.error("Error in action loop:", error);
+    throw error;
+  }
+}
+
+export async function createActionLoopForManager(): Promise<ActionLoop> {
   const currentStateOfExecution = await getCurrentStateOfExecution();
   console.log("currentStateOfExecution", currentStateOfExecution);
 
-  const observationReflection = await getObservationReflection(
+  const observationReflection = await getObservationReflectionForManager(
     currentStateOfExecution
   );
   console.log("observationReflection", observationReflection);
 
-  const stateOfMind = await generateResponse({
+  const stateOfMind = await generateResponseForManager({
     text: observationReflection,
-    username: "Chillpill",
+    username: "ChillpillManager",
     userPrompt:
-      "Based on your observations, describe your current state of mind:",
+      "Based on your observations, describe your current state of mind as Chillpill’s Manager:",
   });
   console.log("stateOfMind", stateOfMind);
-  const hlpPlanReasoning = await generateResponse({
+
+  const hlpPlanReasoning = await generateResponseForManager({
     text: `${currentStateOfExecution}\n${observationReflection}\n${stateOfMind}`,
-    username: "Chillpill",
-    userPrompt: "Provide reasoning for your next high-level plan:",
+    username: "ChillpillManager",
+    userPrompt:
+      "Provide reasoning for your next high-level plan as Chillpill’s Manager:",
   });
   console.log("hlpPlanReasoning", hlpPlanReasoning);
 
-  const task = await generateTask(
+  const task = await generateTaskForManager(
     currentStateOfExecution,
     observationReflection
   );
   console.log("task", task);
+
   const taskResponse = await executeTask(task);
   console.log("Task execution response:", taskResponse);
+
   // Create the action loop structure
   return {
     highLevelPlanning: {

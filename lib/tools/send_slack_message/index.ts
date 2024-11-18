@@ -1,6 +1,6 @@
 import type { TaskGeneration } from "../actionLoop/generateTask";
 import { trackCreateSlackMessage } from "@/lib/stack/trackCreateSlackMessage";
-import { generateSlackMessage } from "@/lib/openai/generateSlackMessage";
+import { generateSlackMessageForManager as generateSlackMessage } from "@/lib/openai/generateSlackMessage";
 import { slack } from "@/lib/slack/client";
 
 export async function sendSlackMessage(task: TaskGeneration) {

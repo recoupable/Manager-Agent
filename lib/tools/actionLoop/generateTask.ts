@@ -1,7 +1,7 @@
 import { openai } from "../../openai/client";
 import { OPEN_AI_MODEL } from "../../consts";
 import type { ActionType } from "./types";
-import { whoIsChillpill } from "@/lib/openai/instructions";
+import { whoIsChillpillManager } from "@/lib/openai/instructions";
 import { getEventsForToday } from "@/lib/stack/getEventsForToday";
 
 export interface TaskGeneration {
@@ -11,17 +11,17 @@ export interface TaskGeneration {
   action: ActionType;
 }
 
-export async function generateTask(
+export async function generateTaskForManager(
   llpPlan: string,
   llpPlanReasoning: string
 ): Promise<TaskGeneration> {
   const availableActions: ActionType[] = ["send_email", "send_slack_message", "read_slack_messages"];
 
-  // Only read and respond to messages
+  // Focused on strategy and guidance
   return {
-    taskId: "chat",
-    task: "Read and respond to messages naturally",
-    taskReasoning: "Keep conversations flowing",
-    action: "read_slack_messages"
+    taskId: "strategic_response",
+    task: "Read Slack messages and provide strategic, insightful responses",
+    taskReasoning: "Guide Chillpill through focused and actionable feedback to ensure alignment with long-term goals",
+    action: "read_slack_messages",
   };
 }

@@ -8,7 +8,7 @@ export async function sendEmail(task: TaskGeneration) {
     const emailContent = await generateEmailContent(task);
 
     const emailConfig = {
-      from: "Chillpill <chillpill@recoupable.com>",
+      from: "Manager <manager@recoupable.com>",
       to: ["sweetmantech@gmail.com", "sidney@recoupable.com"],
       subject: emailContent.subject,
       html: emailContent.html,
